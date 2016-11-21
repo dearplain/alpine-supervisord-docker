@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM frolvlad/alpine-glibc
 MAINTAINER Emil Nilsson <eonilsson@gmail.com>
 
 ENV PYTHON_VERSION=2.7.12-r0
