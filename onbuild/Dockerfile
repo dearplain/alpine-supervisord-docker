@@ -1,7 +1,5 @@
-FROM plain/alpine-supervisord-docker
+FROM plain/alpine-supervisord-glibc
 MAINTAINER dearplain <lw6c@qq.com>
-
-ONBUILD COPY supervisord.conf /etc/supervisord.conf
 
 CMD []
 
