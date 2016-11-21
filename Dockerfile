@@ -7,7 +7,7 @@ ENV SUPERVISOR_VERSION=3.3.0
 
 RUN apk update && apk add -u python=$PYTHON_VERSION py-pip=$PY_PIP_VERSION
 RUN pip install supervisor==$SUPERVISOR_VERSION
-COPY supervisor /etc/
+COPY supervisor /etc/supervisor
 RUN mkdir /etc/supervisor/conf.d
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]
