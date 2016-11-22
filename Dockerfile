@@ -8,7 +8,9 @@ ENV SUPERVISOR_VERSION=3.3.0
 RUN apk update && apk add -u python=$PYTHON_VERSION py-pip=$PY_PIP_VERSION
 RUN pip install supervisor==$SUPERVISOR_VERSION
 COPY supervisor /etc/supervisor
-RUN mkdir /etc/supervisor/conf.d
+RUN mkdir /etc/supervisor/conf.d \
+ && mkdir -p $( dirname $(cat /etc/supervisord.conf | grep logfile= | grep "\.log" | sed s/.*logfile=// ) ) \
+ && touch $( cat /etc/supervisord.conf  | grep logfile= | grep "\.log" | sed s/.*logfile=// )
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]
 
