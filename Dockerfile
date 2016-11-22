@@ -9,8 +9,8 @@ RUN apk update && apk add -u python=$PYTHON_VERSION py-pip=$PY_PIP_VERSION
 RUN pip install supervisor==$SUPERVISOR_VERSION
 COPY supervisor /etc/supervisor
 RUN mkdir /etc/supervisor/conf.d \
- && mkdir -p $( dirname $(cat /etc/supervisor/supervisord.conf | grep logfile= | grep "\.log" | sed s/.*logfile=// ) ) \
- && touch $( cat /etc/supervisor/supervisord.conf  | grep logfile= | grep "\.log" | sed s/.*logfile=// )
+ && mkdir -p /var/log/supervisor \
+ && touch /var/log/supervisor/supervisord.log
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]
 
