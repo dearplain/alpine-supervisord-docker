@@ -1,4 +1,4 @@
-FROM apline
+FROM alpine
 MAINTAINER lw6c@qq.com
 
 RUN apk --no-cache add ca-certificates && \
