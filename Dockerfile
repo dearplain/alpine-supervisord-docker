@@ -1,12 +1,13 @@
-FROM frolvlad/alpine-glibc
-MAINTAINER Emil Nilsson <eonilsson@gmail.com>
+FROM apline
+MAINTAINER lw6c@qq.com
 
-ENV PYTHON_VERSION=2.7.12-r0
-ENV PY_PIP_VERSION=8.1.2-r0
-ENV SUPERVISOR_VERSION=3.3.0
+RUN apk --no-cache add ca-certificates && \
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk && \
+    apk add glibc-2.25-r0.apk
 
-RUN apk update && apk add -u python=$PYTHON_VERSION py-pip=$PY_PIP_VERSION
-RUN pip install supervisor==$SUPERVISOR_VERSION
+RUN apk update && apk add -u python py-pip tzdata
+RUN pip install supervisor
 COPY supervisor /etc/supervisor
 RUN mkdir /etc/supervisor/conf.d \
  && mkdir -p /var/log/supervisor \
